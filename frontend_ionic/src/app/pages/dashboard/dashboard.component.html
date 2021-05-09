@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary" autoHide="false"></ion-menu-button>  
+    </ion-buttons>
+    
+    <ion-buttons slot="start">
+      <ion-button (click)="profileView()">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+      <!-- <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button> -->
+      <ion-title class="pl-0" *ngIf="profile != undefined ">{{profile['username']}}</ion-title>
+    </ion-buttons>   
+    <ion-buttons slot="primary">
+      <ion-button color="secondary" (click)="logout()">
+        <!-- <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon> -->
+        <ion-icon slot="icon-only" name="log-out-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+<div class="loader" *ngIf="loaded" >
+  <img src="./../../../assets/images/loading.gif" width="30%" height="25%" alt="loading">
+</div>
+<ion-content *ngIf="!loaded" class="pb-5">
+  <app-listview></app-listview>
+
+</ion-content>
+
+

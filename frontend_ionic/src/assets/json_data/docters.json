@@ -1,0 +1,100 @@
+
+
+{
+    "status":"success",
+    "data":[
+        {
+            "id":"abc112",
+            "dr_mrn_":"233",
+            "type":"regular",
+            "name":"John Din",
+            "description":"",
+            "specialise":"ENTC",
+            "time_slot":[{
+                "id":"1",
+                "date":"20-10-2020",
+                "time":"10:00 - 10:30 AM",
+                "status":"1",
+                "is_passed":"0",
+                "available_seat":"4",
+                "total_seat":"10"
+            },
+            {
+                "id":"2",
+                "date":"20-10-2020",
+                "time":"10:30 - 11:30 AM",
+                "status":"1",
+                "is_passed":"0",
+                "available_seat":"2",
+                "total_seat":"10"
+            },
+            {
+                "id":"3",
+                "date":"20-10-2020",
+                "time":"12:00 - 01:30 AM",
+                "status":"1",
+                "is_passed":"0",
+                "available_seat":"9",
+                "total_seat":"10"
+            },            
+            {
+                "id":"4",
+                "date":"20-10-2020",
+                "time":"06:00 - 07:00 AM",
+                "status":"0",
+                "is_passed":"0",
+                "available_seat":"10",
+                "total_seat":"10"
+            }
+        ]
+
+        },
+        {
+            "id":"abcd1234",
+            "dr_mrn_":"233",
+            "type":"regular",
+            "name":"Suhas Rote",
+            "description":"",
+            "specialise":"ONCO",
+            "time_slot":[{
+                "id":"1",
+                "date":"20-10-2020",
+                "time":"10:00 - 10:30 AM",
+                "status":"1",
+                "is_passed":"0",
+                "available_seat":"4",
+                "total_seat":"10"
+            },
+            {
+                "id":"2",
+                "date":"20-10-2020",
+                "time":"10:30 - 11:30 AM",
+                "status":"1",
+                "is_passed":"0",
+                "available_seat":"2",
+                "total_seat":"10"
+            },
+            {
+                "id":"3",
+                "date":"20-10-2020",
+                "time":"12:00 - 01:30 AM",
+                "status":"1",
+                "is_passed":"0",
+                "available_seat":"9",
+                "total_seat":"10"
+            },            
+            {
+                "id":"4",
+                "date":"20-10-2020",
+                "time":"06:00 - 07:00 AM",
+                "status":"0",
+                "is_passed":"0",
+                "available_seat":"10",
+                "total_seat":"10"
+            }
+        ]
+
+        }
+        
+    ]
+}

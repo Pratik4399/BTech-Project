@@ -1,0 +1,30 @@
+{
+    "status":"success",
+    "data": [
+        {
+            "id":"1",
+            "username":"Vishal",
+            "name":"vishal g",
+            "password":"qwerty",
+            "email":"vishal@gmail.com",
+            "contact":"+91 9509503636",
+            "address":"aundh Pune Maharashtra",
+            "status":"active",
+            "state":"true"
+            
+        },
+        {
+            "id":"1",
+            "username":"Abhishek",
+            "name":"Abhishek b",
+            "password":"qwerty",
+            "email":"abhishek@gmail.com",
+            "contact":"+91 9898986365",
+            "address":"Karad Maharashtra",
+            "status":"active",
+            "state":"true"
+            
+        }
+    ]
+    
+}

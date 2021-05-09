@@ -1,0 +1,55 @@
+<ion-header *ngIf="showModal" translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pages/appointments"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Note</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+<div class="loader" *ngIf="loaded" >
+  <img src="./../../../assets/images/loading.gif" width="30%" height="25%" alt="loading">
+</div>
+<ion-content *ngIf="!loaded" class="container-fluid" fullscreen>
+  <form [formGroup]="noteForm" (ngSubmit)="submitForm()" novalidate>
+    
+    <ion-item lines="full">
+      <ion-label position="floating">Complaint</ion-label>
+      <ion-input type="text" formControlName="compliant" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Observation</ion-label>
+      <ion-input type="text" formControlName="observation" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Investigation</ion-label>
+      <ion-input type="text" formControlName="investigation" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Diagnosis</ion-label>
+      <ion-input type="text" formControlName="diagnosis" required></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Remarks</ion-label>
+      <ion-textarea rows="2" cols="10" formControlName="remarks" required></ion-textarea>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Referred By</ion-label>
+      <ion-input type="text" formControlName="referred_by" ></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label position="floating">Referred To</ion-label>
+      <ion-input type="text" formControlName="referred_to" ></ion-input>
+    </ion-item>     
+       
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" [disabled]="noteForm['status']=='INVALID'" expand="block">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

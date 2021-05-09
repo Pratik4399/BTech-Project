@@ -1,0 +1,30 @@
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    top: 17%;
+    width: 100%;
+  } 
+
+.up{
+    font-size: 23px;
+    text-align: end;
+    vertical-align: bottom;
+    color: green;
+}
+
+.down{
+    font-size: 23px;
+    text-align: end;
+    vertical-align: bottom;
+    color: red;
+}
+
+.set{
+    font-size: 23px;
+    text-align: end;
+    vertical-align: bottom;
+    color:blue;
+}

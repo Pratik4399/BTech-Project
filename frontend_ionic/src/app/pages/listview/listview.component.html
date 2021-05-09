@@ -1,0 +1,83 @@
+<ion-header translucent>
+
+  
+</ion-header>
+<div class="loader" *ngIf="loaded" >
+  <img src="./../../../assets/images/loading.gif" width="30%" height="25%" alt="loading">
+</div>
+<ion-toolbar>
+  <ion-searchbar (ionChange)="filterData($event)"></ion-searchbar>
+</ion-toolbar>
+<ion-content *ngIf="!loaded" fullscreen> 
+
+  <div class="">
+    <div class="card" *ngFor="let nd of sdata; let i=index">
+      <ion-item>
+        <div class="row col-12 p-2 m-0">
+        
+        <ion-label class="col-7 p-0 m-0" (click)="openDetails(nd)">
+          <h2>{{nd.index_nm}}</h2>      
+          <h3>{{nd.name}}</h3>
+          
+        </ion-label>
+       
+      <!-- <ion-label >
+        <h2>
+          <div class="pb-2 p-1">{{nd.value}}
+          <ion-badge color="success" class="p-1">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+          </ion-badge>
+        </div>
+        </h2>      
+        <h3>{{nd.state_value}} ({{nd.percent_state}})</h3>        
+      </ion-label> -->
+      <div class="row col-4 p-0 m-0" >
+       
+          <div class="col-12 p-0 m-0">{{nd.value}}
+          <ion-icon *ngIf="nd.state == '+' " class="up"  name="caret-up-outline"></ion-icon>
+          <ion-icon *ngIf="nd.state == '-' " class="down"  name="caret-down-outline"></ion-icon>
+        </div>
+          
+        <div class="col-12 p-0">{{nd.state_value}} ({{nd.percent_state}})</div>        
+      </div>
+      <ion-icon class="set mt-3" name="add-circle-outline" (click)="presentAlertConfirm(nd)"></ion-icon>
+    </div>
+      
+      
+      </ion-item>
+  </div>
+  </div>
+
+  <!-- <div *ngIf="listtype == 'docters'">
+    
+  
+    <div class="card" *ngFor="let nd of ldata; let i=index">
+      <ion-item *ngIf="!fdata[nd.id]">
+        <ion-avatar slot="start">
+          <img src="./assets/icon/{{nd.doctor_id}}.png">
+        </ion-avatar>
+        <ion-label (click)="openDetails(nd)">
+          <h2>{{nd.doctor_name}}</h2>      
+          <h3>{{nd.doctor_spec}}</h3>
+          
+        </ion-label>
+        <ion-badge *ngIf="showModal" (click)="showApptList(nd['doctor_id'])" color="success">Appointments</ion-badge>
+      
+      </ion-item>
+      <div class="card p-2" [ngClass]="{'showappt': drapptshow == nd['doctor_id'], 'hideappt':drapptshow != nd['doctor_id'] }">    
+      <div class="row col-12 m-0 pr-0 pt-2" *ngFor="let slt of nd.time_slot">
+        <div class="col-10 p-0 pt-2">
+          <ion-row>Time - {{slt.time}}</ion-row>
+          
+        </div>
+        <div class="col-2 p-0">
+          <ion-badge class="m-2" (click)="presentAlertConfirm(nd,slt)" color="tertiary">Book</ion-badge>
+        </div>
+        <ion-progress-bar color="primary" value="{{slt.progress}}"></ion-progress-bar>
+        
+      </div>
+      </div>
+    </div>
+  </div> -->
+
+</ion-content>

@@ -1,0 +1,102 @@
+
+.cancel{
+    margin-left: 2%;  
+  }
+  
+  .atos_logo{
+    height: auto;
+    width: 22%;
+  }
+
+  .loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    top: 17%;
+    width: 100%;
+  } 
+  
+  
+  
+  .login-card{
+  
+    border: solid black 2px;
+  
+    border-radius: 10px;
+  
+    align-items: flex-start;
+  
+    display: flex;
+  
+    justify-content: flex-start;
+  
+  }
+  
+  
+  
+  .login-card-body{
+  
+    border: #ffffff;
+  
+    width: 100%;
+  
+  }
+  
+  
+  
+  .header{
+  
+    width: 100%;
+  
+  } 
+  
+  
+  
+  .pwd_mismatch{
+  
+    color: #dc3545;
+  
+    font-size: 80%;
+  
+    width: 100%;
+  
+    margin-top: 0.25rem;
+  
+  }
+  
+  
+  
+  .modal-title{
+  
+    padding-left: 2%;
+  
+  }
+  
+  
+  .login-form{
+  
+  
+  
+    padding-left: 3%;
+  
+    padding-right: 3%;
+  
+    font-size: 16px;
+  
+    font-weight: 600;
+  
+  
+  
+  }
+  
+  
+  
+   .btn-primary{
+  
+    padding: 0.6rem 1.2rem;
+  
+    font-size: 0.9rem;
+  
+  }

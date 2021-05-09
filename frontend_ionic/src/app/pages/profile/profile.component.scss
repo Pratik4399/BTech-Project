@@ -1,0 +1,43 @@
+.avt{
+    height: auto;
+    width: 10rem;
+}
+
+span{
+    color:rgb(4, 38, 109);
+    font-size: 18px;
+    padding-right: 10px;
+    width: 28%;
+}
+
+.pval{
+    color:rgb(13, 13, 14);
+    font-size: 18px;
+    padding-right: 10px;
+    //width: 70%;
+    word-wrap: break-word !important;
+}
+.ion-item
+{
+    padding-inline-start: 1px !important;
+}
+
+p{
+    word-wrap: break-word;
+}
+
+.icon_bk{
+    font-size: 1.8rem;
+    text-align: center;
+    margin-left: 5px;
+  }
+
+  .loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    top: 17%;
+    width: 100%;
+  } 

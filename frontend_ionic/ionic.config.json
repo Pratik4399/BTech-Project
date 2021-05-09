@@ -1,0 +1,7 @@
+{
+  "name": "rcp_c",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
