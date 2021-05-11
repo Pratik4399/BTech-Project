@@ -15,7 +15,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListviewComponent } from './listview/listview.component';
 import { DetailsComponent } from './details/details.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NotesComponent } from './notes/notes.component';
 
 
 @NgModule({
@@ -32,8 +31,7 @@ import { NotesComponent } from './notes/notes.component';
     DashboardComponent,
     ListviewComponent,
     DetailsComponent,
-    ProfileComponent,
-    NotesComponent
+    ProfileComponent
 
   ],
   providers:[DatePipe]

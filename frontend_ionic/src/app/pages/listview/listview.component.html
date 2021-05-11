@@ -8,8 +8,52 @@
 <ion-toolbar>
   <ion-searchbar (ionChange)="filterData($event)"></ion-searchbar>
 </ion-toolbar>
-<ion-content *ngIf="!loaded" fullscreen> 
+<ion-content *ngIf="!loaded" fullscreen>
+  <!-- selected stocks -->
+  <div class="">
+   
+    <strong><ion-label class="m-2 mb-2" color="primary">Selected Stocks</ion-label></strong>
+   
+    
+    <div class="card" *ngFor="let nd of selected_data; let j=index">
+      <ion-item>
+        <div class="row col-12 p-2 m-0">
+        
+        <ion-label class="col-7 p-0 m-0" (click)="openDetails(nd)">
+          <h2>{{nd.index_nm}}</h2>      
+          <h3>{{nd.name}}</h3>
+          
+        </ion-label>
+       
+      <!-- <ion-label >
+        <h2>
+          <div class="pb-2 p-1">{{nd.value}}
+          <ion-badge color="success" class="p-1">
+            <ion-icon name="arrow-up-outline"></ion-icon>
+          </ion-badge>
+        </div>
+        </h2>      
+        <h3>{{nd.state_value}} ({{nd.percent_state}})</h3>        
+      </ion-label> -->
+      <div class="row col-4 p-0 m-0" >
+       
+          <div class="col-12 p-0 m-0">{{nd.value}}
+          <ion-icon *ngIf="nd.state == '+' " class="up"  name="caret-up-outline"></ion-icon>
+          <ion-icon *ngIf="nd.state == '-' " class="down"  name="caret-down-outline"></ion-icon>
+        </div>
+          
+        <div class="col-12 p-0">{{nd.state_value}} ({{nd.percent_state}})</div>        
+      </div>
+      <ion-icon class="down mt-3" name="remove-circle-outline" (click)="presentAlertConfirm(nd)"></ion-icon>
+      </div>
+      
+      
+      </ion-item>
+      </div>
 
+  </div>
+  <!-- normal stock list -->
+  <strong><ion-label class="m-2 mb-2" color="primary">Stocks</ion-label></strong>
   <div class="">
     <div class="card" *ngFor="let nd of sdata; let i=index">
       <ion-item>

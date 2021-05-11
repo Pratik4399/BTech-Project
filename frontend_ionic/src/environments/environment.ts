@@ -21,8 +21,8 @@ export const environment = {
    
   LoginApiUrl:"/assets/json_data/users.json",
   userApi:"/assets/json_data/docters.json",
-  //getStocksApi:"http://52.142.2.226:8000/stock_data_api/real_time_data",
-  getStocksApi:"./assets/json_data/stocks.json",
+  getStocksApi:"http://52.142.2.226:8000/stock_data_api/real_time_data",
+  //getStocksApi:"./assets/json_data/stocks.json",
 
 };
 

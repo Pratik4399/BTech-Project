@@ -18,6 +18,7 @@ import { UsersService } from './../../data/service/users/users.service';
 export class DetailsComponent implements OnInit {
 
   loaded = true;
+  loading = false;
   submitted = false;
   login_usr:any;
   alertForm:any;
@@ -70,6 +71,7 @@ export class DetailsComponent implements OnInit {
     if(tval != 'undefined')
     {
       this.loaded = false;
+      this.loading = true;
       let res = this.commonService.sendAlert(this.item, tval);
     }
     

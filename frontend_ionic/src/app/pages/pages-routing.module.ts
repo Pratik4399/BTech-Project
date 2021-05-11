@@ -6,7 +6,6 @@ import { PagesPage } from './pages.page';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListviewComponent } from './listview/listview.component';
 import { DetailsComponent } from './details/details.component';
-import { NotesComponent } from './notes/notes.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
@@ -25,11 +24,6 @@ const routes: Routes = [
       {
         path: 'details',
         component: DetailsComponent
-      },
-      {
-        path:'notes',
-        component:NotesComponent
-
       },
       {
         path:'profile',

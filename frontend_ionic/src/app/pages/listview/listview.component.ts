@@ -1,6 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController, AlertController, NavParams} from '@ionic/angular';
+
+import { timer, Observable, Subject } from 'rxjs';
+import { switchMap, takeUntil, catchError } from 'rxjs/operators';
+
 import { Storage } from '@ionic/storage';
 
 //service
@@ -19,6 +23,7 @@ export class ListviewComponent implements OnInit {
   public err_msg:string;
   public fdata = {};
   selected_data=[];
+  show_selected = false;
   sdata:any;
   
   
@@ -54,17 +59,8 @@ export class ListviewComponent implements OnInit {
 
     if(this.login_usr != 'undefined')
     {     
-      this.loginService.getStoreData('selected_stocks').then((lst)=>{
-       
-        console.log(lst);
-
-        if(lst != null){
-          this.selected_data = lst;
-        }       
-        
-      });
-
       this.getStocks();
+      this.getSelected();
     }
  
     });
@@ -113,7 +109,7 @@ export class ListviewComponent implements OnInit {
       const alert = await this.alrtCtrl.create({
         cssClass: 'my-custom-class',
         header: 'Confirm!',
-        message: 'Do you Want to Set Alert For'+val.name,
+        message: 'Do you Want to select stock '+val.name+' For prediction ?',
         buttons: [
           {
             text: 'Cancel',
@@ -127,8 +123,8 @@ export class ListviewComponent implements OnInit {
             handler: () => {
               this.selected_data.push(val);
               this.loginService.storeLogData('selected_stocks',this.selected_data);
-              this.showToast("Stock added in alert list", 'success');  
-              
+              this.showToast("Stock added in a Selection list", 'success');  
+              this.getSelected();
               this.dismissModal();
             
             }
@@ -137,6 +133,25 @@ export class ListviewComponent implements OnInit {
       });
   
       await alert.present();
+    }
+
+    //get selected stock
+    getSelected(){
+      console.log(this.selected_data.length);
+      if(this.selected_data.length == 0)
+      {
+        this.loginService.getStoreData('selected_stocks').then((dt)=>{
+          
+          if(dt != null)
+          {
+            this.selected_data = dt;
+            console.log(this.selected_data)
+          }
+          
+        })
+        this.show_selected = true;
+      }
+        
     }
 
     // modal function
