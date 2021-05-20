@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ModalController, AlertController, NavParams} from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 //service
 import { UsersService } from './../../data/service/users/users.service';
@@ -22,6 +23,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private router:Router,
+    public storage:Storage,
     private route:ActivatedRoute,
     private location:Location,
     public usersService:UsersService,
@@ -35,48 +37,22 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mrn = this.route.snapshot.queryParamMap.get('mrn');
-    console.log(this.mrn);
-
-    this.usersService.getUserObj().then((val)=>{
+    
+    this.storage.get('user_obj').then((val)=>{
+    
       this.login_usr = val;
-      this.getProfileData();
-    });
-
+  
+      if(this.login_usr != 'undefined')
+      {     
+        this.profile = this.login_usr;
+        console.log(this.profile)
+        this.loaded = false;
+      }
+   
+      });
     
   }
 
-  // get profile 
-  getProfileData(){
-    this.loaded = true;
-    this.usersService.loadProfile(this.login_usr).subscribe((pdt)=>{
-      console.log(pdt);
-      if(pdt['status'] == 'success' || pdt['profile'].status == 'success')
-      {
-            if(this.login_usr['role'] == 'patient')
-          {
-
-            this.profile = pdt['data'][0];
-
-          }
-          else{
-
-            this.profile = (pdt['profile'].status == 'success')?pdt['profile'].data[0]:undefined;
-
-          }
-      }
-      else{
-
-        this.showMsg("Profile Data Not Found","warning");
-
-      }
-         
-      // this.appointment = (pdt['appointment'].status == 'success')?pdt['appointment']:undefined;
-      console.log(this.profile);
-      this.loaded = false;     
-      
-    });
-  }
 
   //show toast msg
   showMsg(msg,type)

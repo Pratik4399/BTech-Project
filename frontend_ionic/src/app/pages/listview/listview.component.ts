@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import { Component, OnInit,OnChanges, Output, EventEmitter, Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController, AlertController, NavParams} from '@ionic/angular';
 
-import { timer, Observable, Subject } from 'rxjs';
+import { timer,of, Observable, Subject } from 'rxjs';
 import { switchMap, takeUntil, catchError } from 'rxjs/operators';
 
 import { Storage } from '@ionic/storage';
@@ -25,11 +25,28 @@ export class ListviewComponent implements OnInit {
   selected_data=[];
   show_selected = false;
   sdata:any;
+
+  private ftch_data: Observable<any> = this.commonService.getStocks();
+  private killTrigger: Subject<void> = new Subject();
+  private refreshInterval: Observable<any> = timer(0, 12*1000)
+  .pipe(
+  // This kills the request if the user closes the component 
+  takeUntil(this.killTrigger),
+  // switchMap cancels the last request, if no response have been received since last tick
+  switchMap((dt) =>          
+  this.ftch_data
+      
+    ),
+  // catchError handles http throws 
+  catchError(error => of('Error'))
+  );
+  
   
   
   @Input() showModal = false;
   @Output() emitService = new EventEmitter();
   loaded = false;
+  nloaded=false;
 
   title:string;
  
@@ -47,18 +64,27 @@ export class ListviewComponent implements OnInit {
      private commonService:CommonService,
      public loginService : UsersService
      
-     ) { 
-       console.log(this.yest_day);
+     ) {
+       
+       
      }
 
+  mgOnChanges(){
+    this.ftch_data.subscribe((udt)=>{
+      console.log(udt);
+      this.sdata = udt['data'];
+    });
+  }
+
   ngOnInit() {
+  
 
     this.storage.get('user_obj').then((val)=>{
     
     this.login_usr = val;
 
     if(this.login_usr != 'undefined')
-    {     
+    {   
       this.getStocks();
       this.getSelected();
     }
@@ -69,30 +95,45 @@ export class ListviewComponent implements OnInit {
   }
 
   //get stocks data
-  getStocks(){
+  getStocks(){    
+    this.nloaded = true;
     this.commonService.getStocks().subscribe((stck)=>{
-      this.sdata = stck['data'];
-      console.log(stck)
+    this.sdata = stck['data'];
+    console.log(this.sdata)
+    this.nloaded = false;
     });
+     
   }
 
   //filter serach bar data
   filterData(ev){
-    this.fdata = {};
-    let fdata = this.sdata;
     
+    let fdata = this.sdata;
+    console.log(fdata);
+    let temp = [];
     let qry = ev.target.value;
-    requestAnimationFrame(() => {
-      fdata.forEach((item,index) => {
+    
+    requestAnimationFrame(() => {      
+      
+      fdata.forEach((item) => {
         
-        let shouldShow = item['name'].toLowerCase().indexOf(qry)>-1;
-     
-        if(shouldShow == false)
-        {
-         this.fdata[item.id] = item.id; 
+        let shouldShow = item['index_nm'].toLowerCase().indexOf(qry)>-1;
+        
+        if(shouldShow)
+        {          
+         //this.fdata[item.id] = item.id;
+         temp.push(item);
         }
         
       });
+     
+      // if(temp.length == 0){
+      //   this.sdata = this.fdata;
+      // }
+      // else{
+      //   this.sdata = temp;
+      // }     
+           
       
     });
   }
@@ -105,11 +146,12 @@ export class ListviewComponent implements OnInit {
 
 
   // book appointment  
-  async presentAlertConfirm(val) {
+  async presentAlertConfirm(val, add = true) {
       const alert = await this.alrtCtrl.create({
         cssClass: 'my-custom-class',
         header: 'Confirm!',
-        message: 'Do you Want to select stock '+val.name+' For prediction ?',
+        message: (add== true) ?'Do you Want to select stock '+val.name+' for prediction ?':
+        'Do you Want to Remove stock '+val.name+' From selection list ?',
         buttons: [
           {
             text: 'Cancel',
@@ -121,9 +163,25 @@ export class ListviewComponent implements OnInit {
           }, {
             text: 'Confirm',
             handler: () => {
-              this.selected_data.push(val);
-              this.loginService.storeLogData('selected_stocks',this.selected_data);
-              this.showToast("Stock added in a Selection list", 'success');  
+
+              let i = this.selected_data.findIndex(el=>el.index_nm == val.index_nm);
+             
+              if(add == true && i == -1)
+              {
+                this.selected_data.push(val);
+                this.loginService.storeLogData('selected_stocks',this.selected_data);
+                this.showToast("Stock added in a Selection list", 'success');  
+              }
+              else if(add == false){
+                this.selected_data.splice(i ,1);
+                this.loginService.storeLogData('selected_stocks',this.selected_data);
+                this.showToast("Stock removed from Selection list", 'success');  
+                
+              }
+              else{
+                this.showToast("Stock already added in Selection list", 'warning');                
+              }
+              
               this.getSelected();
               this.dismissModal();
             
@@ -173,5 +231,9 @@ export class ListviewComponent implements OnInit {
     async showToast(msg, color){
       
       this.commonService.showToast(msg, color,0);
+    }
+
+    ngOnDestroy(){
+      this.killTrigger.next();
     }
 }

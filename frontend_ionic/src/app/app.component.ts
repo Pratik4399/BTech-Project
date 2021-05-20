@@ -39,11 +39,11 @@ export class AppComponent implements OnInit {
       url: '/pages/profile',
       icon: 'heart'
     },
-    {
-      title: 'My Stocks',
-      url: '/pages/list/docters',
-      icon: 'bag-add'
-    }
+    // {
+    //   title: 'My Stocks',
+    //   url: '/pages/list/my',
+    //   icon: 'bag-add'
+    // }
     
   ];
   

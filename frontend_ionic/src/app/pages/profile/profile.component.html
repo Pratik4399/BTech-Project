@@ -15,73 +15,36 @@
   <div class="row col-12 m-0 mt-2 p-0">
     <ion-item class="row col-12 m-0 mt-2 p-0">
       <ion-avatar class="col-xs-4 col-sm-4 pl-0 avt">
-        <img *ngIf="login_usr['role'] == 'doctor'; else patient" src="./assets/icon/{{profile['doctor_id']}}.png">
-        <ng-template #patient>
-          <img src="./assets/icon/{{profile['MRN']}}.png">
-        </ng-template>
+        <img src="./assets/icon/patient.png">
+        
      </ion-avatar>
       <div class="col-xs-8 col-sm-8 pr-0">
-        <h4><strong>{{profile['Name']}}</strong></h4>
-        <div *ngIf="login_usr.role == 'patient'" class="row m-0">
-          <p>MRN - {{profile['MRN']}}</p>
-        </div>
-        <div *ngIf="login_usr.role == 'doctor'" class="row m-0">          
-          <p>{{profile['Medical_Title']}}</p>
-          <p>{{profile['Specialization']}}</p>
-          <p>MRN - {{profile['doctor_id']}}</p>
-        </div>
+        <h4><strong>{{profile['name']}}</strong></h4>
+        
 
       </div>
     </ion-item>   
-    <div class="pr-2" *ngIf="login_usr.role == 'doctor'; else pro_patient">
-        <ion-item lines="full">
-          <!-- <ion-label><span>Facility - </span><span class="pval">{{profile['Facility_Name']}}</span> </ion-label> -->
-          <div class="row col-sm-12 col-xs-12 m-0 p-0">
-            <span class="col-12 p-0">Facility </span>
-            <div class="col p-0  m-1 pval"><p class="p-1 mt-2">{{profile['Facility_Name']}}</p></div>
-          </div> 
-        </ion-item>
-        <ion-item lines="full">
-          <ion-label><span>Email - </span><span class="pval">{{profile['Email']}}</span> </ion-label>
-        </ion-item>
-        <ion-item lines="full">
-          <ion-label><span>Contact -</span><span class="pval">{{profile['Contact']}}</span></ion-label>
-        </ion-item>
-        <ion-item lines="full">
-          <div class="row col-sm-12 col-xs-12 m-0 p-0">
-            <span class="col-12 p-0">Address </span>
-            <div class="col p-0  m-1 pval"><p class="p-1 mt-2">{{profile['Address']}}</p></div>
-          </div>        
-        </ion-item>        
-        <ion-item>
-          <ion-label><span>License</span> - <span class="pval">{{profile['License']}}</span></ion-label>
-        </ion-item>
-    </div>
-    <ng-template class="pr-2" #pro_patient>
-      <ion-item lines="full">
-        <ion-label class="row col-sm-12 p-0 m-0"><span>Blood Group - </span><span class="pval">{{profile['Blood_Group']}}</span></ion-label>
-      </ion-item>
+    <div class="pr-2">
+
+      
       <ion-item lines="full">
         <ion-label class="row col-sm-12 p-0 m-0"><span>DOB -</span><span class="pval">{{profile['DOB']}}</span></ion-label>
       </ion-item>
       <ion-item lines="full" class="row col-sm-12 p-0 m-0">
-        <ion-label class="row col-sm-12 p-0 m-0"><span>Contact -</span><span class="pval">{{profile['Contact']}}</span></ion-label>
+        <ion-label class="row col-sm-12 p-0 m-0"><span>Contact -</span><span class="pval">{{profile['contact']}}</span></ion-label>
       </ion-item>
+      
       <ion-item lines="full" class="row col-sm-12 p-0 m-0">
-        <span>Emergency Contact -</span>
-        <p class="p-2 mt-2"><span class="pval">{{profile['Emergency_contact']}}</span></p>
-      </ion-item>
-      <ion-item lines="full" class="row col-sm-12 p-0 m-0">
-        <ion-label class="row col-sm-12 p-0 m-0"><span>Email - </span> <span class="pval">{{profile['Email']}}</span></ion-label>
+        <ion-label class="row col-sm-12 p-0 m-0"><span>Email - </span> <span class="pval">{{profile['email']}}</span></ion-label>
       </ion-item>
       <ion-item lines="full" class="row col-sm-12 p-0 m-0">
         <div class="row col-sm-12 col-xs-12 m-0 p-0">
           <span class="col-12 p-0">Address </span>
-          <div class="col p-0  m-1 pval"><p class="p-1 mt-2">{{profile['Address']}}</p></div>
+          <div class="col p-0  m-1 pval"><p class="p-1 mt-2">{{profile['address']}}</p></div>
         </div>   
       </ion-item>
       
-    </ng-template>
+    </div>
    
 
   </div>
