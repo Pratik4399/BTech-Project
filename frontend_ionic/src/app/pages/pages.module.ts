@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PagesPageRoutingModule } from './pages-routing.module';
 //import { Zoom } from '@ionic-native/zoom/ngx';
+
 import { PagesPage } from './pages.page';
 import { DatePipe } from '@angular/common';
 import { FileSelectDirective, FileDropDirective, FileUploadModule } from 'ng2-file-upload';

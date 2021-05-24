@@ -13,10 +13,12 @@ import { ToastController } from '@ionic/angular';
 // import { File } from '@ionic-native/file';
 import { environment } from '../../../../environments/environment';
 
+//fcm
+import { FCM } from '@ionic-native/fcm/ngx';
+
+
 const userApi = environment.userApi;
 const getStocksApi = environment.getStocksApi;
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,8 @@ export class CommonService {
     private router:Router,
     // private transfer: FileTransfer,
     // private file:File,
-    private toast: ToastController
+    private toast: ToastController,
+    private fcm: FCM,
   ) {
     
   }
@@ -105,6 +108,11 @@ export class CommonService {
     });     
     
     toast.present();
+  }
+
+  // send notification
+  sendPushNotification(){
+
   }
 
   

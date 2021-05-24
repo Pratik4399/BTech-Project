@@ -4,10 +4,13 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { interval, Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 //service
 import { CommonService } from './data/service/common/common.service';
+//fcm
+import { FCM } from '@ionic-native/fcm/ngx';
 
 const source = interval(Number(environment.getAlertMsgCount));
 //const source = interval(20000);
@@ -24,8 +27,7 @@ export class AppComponent implements OnInit {
   //public appPages : any;
   public login_usr:any;
   public homecare=[];
-  subscription: Subscription;  
-  
+  subscription: Subscription;   
   
 
   public appPages = [  
@@ -52,8 +54,11 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private storage:Storage,    
+    private storage:Storage,
+    private router:Router,
     private commonService:CommonService,
+    private fcm: FCM,
+
     
   ) {
     this.initializeApp();
@@ -64,7 +69,22 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      
+      // get fcm tokan
+      this.fcm.getToken().then(token => {
+        console.log(token);
+      });
+      this.fcm.subscribeToTopic('people');
+
+      this.fcm.onNotification().subscribe(data => {
+        console.log(data);
+        if (data.wasTapped) {
+          console.log('Received in background');
+          this.router.navigate([data.landing_page, data.val]);
+        } else {
+          console.log('Received in foreground');
+          this.router.navigate([data.landing_page, data.val]);
+        }
+      });
     });
   }
 
@@ -86,6 +106,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnDestroy(){
+
+    this.fcm.unsubscribeFromTopic('marketing');
          
   }
 

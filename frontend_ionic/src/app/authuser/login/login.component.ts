@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   // public submit = 0;
   public flag = false;
   public loaded = false;
-  //public loading = false;
+  public loading = false;
   public ldata;
   public lopdata;
   public set_val:any;

@@ -2,7 +2,7 @@ import { Component, OnInit,OnChanges, Output, EventEmitter, Input} from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController, AlertController, NavParams} from '@ionic/angular';
 
-import { timer,of, Observable, Subject } from 'rxjs';
+import { Subscription, Observable, timer } from 'rxjs';
 import { switchMap, takeUntil, catchError } from 'rxjs/operators';
 
 import { Storage } from '@ionic/storage';
@@ -25,23 +25,10 @@ export class ListviewComponent implements OnInit {
   selected_data=[];
   show_selected = false;
   sdata:any;
+  // refresh timer 
+  refresh_dt: Observable<number> = timer(0, 120000);
 
-  private ftch_data: Observable<any> = this.commonService.getStocks();
-  private killTrigger: Subject<void> = new Subject();
-  private refreshInterval: Observable<any> = timer(0, 12*1000)
-  .pipe(
-  // This kills the request if the user closes the component 
-  takeUntil(this.killTrigger),
-  // switchMap cancels the last request, if no response have been received since last tick
-  switchMap((dt) =>          
-  this.ftch_data
-      
-    ),
-  // catchError handles http throws 
-  catchError(error => of('Error'))
-  );
-  
-  
+  private subscription: Subscription;  
   
   @Input() showModal = false;
   @Output() emitService = new EventEmitter();
@@ -70,10 +57,7 @@ export class ListviewComponent implements OnInit {
      }
 
   mgOnChanges(){
-    this.ftch_data.subscribe((udt)=>{
-      console.log(udt);
-      this.sdata = udt['data'];
-    });
+   
   }
 
   ngOnInit() {
@@ -87,6 +71,7 @@ export class ListviewComponent implements OnInit {
     {   
       this.getStocks();
       this.getSelected();
+      this.pullData();
     }
  
     });
@@ -100,9 +85,29 @@ export class ListviewComponent implements OnInit {
     this.commonService.getStocks().subscribe((stck)=>{
     this.sdata = stck['data'];
     console.log(this.sdata)
+    if(this.sdata.length > 0 && this.selected_data.length > 0)
+    {
+      let match = [];
+      this.selected_data.forEach((val,i)=>{
+        match = this.sdata.map((eml)=>{
+          return eml.index_nm == val.index_nm && eml.value > val.value;
+        })
+      });
+
+      console.log(match);
+      
+    }
     this.nloaded = false;
     });
      
+  }
+
+  //pull data function
+  pullData(){
+    this.subscription = this.refresh_dt.subscribe((dt)=>{
+      console.log(dt);
+      this.getStocks();
+    });
   }
 
   //filter serach bar data
@@ -234,6 +239,6 @@ export class ListviewComponent implements OnInit {
     }
 
     ngOnDestroy(){
-      this.killTrigger.next();
+      this.subscription.unsubscribe();
     }
 }

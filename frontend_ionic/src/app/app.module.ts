@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { Zoom } from '@ionic-native/zoom/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { File } from '@ionic-native/file/ngx';
 
@@ -33,6 +34,7 @@ import { File } from '@ionic-native/file/ngx';
     Zoom,
     File,
     FileOpener,
+    FCM,
     
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

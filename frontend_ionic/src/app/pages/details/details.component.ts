@@ -55,6 +55,11 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  get f()
+  {
+    return this.alertForm.controls;
+  }
+
   //create alert form
   createAlertForm(){
     this.alertForm = this.formBuilder.group({
