@@ -63,7 +63,8 @@ export class DetailsComponent implements OnInit {
   //create alert form
   createAlertForm(){
     this.alertForm = this.formBuilder.group({
-      target: ['', Validators.required]     
+      target: ['', Validators.required],
+      stoploss: ['', Validators.required]     
     });
   }
 
@@ -72,6 +73,7 @@ export class DetailsComponent implements OnInit {
     this.loaded = true;
     this.submitted = true;
     let tval = this.alertForm.value.target;
+    let st_val = this.alertForm.value.stoploss;
 
     if(tval != 'undefined')
     {

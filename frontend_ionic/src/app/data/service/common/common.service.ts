@@ -65,7 +65,7 @@ export class CommonService {
   }
 
   //set alerts 
-  sendAlert(obj, tval){
+  sendAlert(obj, tval, st_val=''){
 
   //   var payload = {
      

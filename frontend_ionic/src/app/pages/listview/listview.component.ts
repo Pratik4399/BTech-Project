@@ -89,8 +89,9 @@ export class ListviewComponent implements OnInit {
     {
       let match = [];
       this.selected_data.forEach((val,i)=>{
-        match = this.sdata.map((eml)=>{
+        match = this.sdata.filter((eml)=>{
           return eml.index_nm == val.index_nm && eml.value > val.value;
+          //return eml.index_nm == val.index_nm;
         })
       });
 

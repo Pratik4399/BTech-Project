@@ -38,7 +38,17 @@
       <ion-input type="text" placeholder="target" formControlName="target" autofocus required></ion-input>
       <div *ngIf="submitted && f.target.errors" class="invalid-feedback">
         <div *ngIf="f.target.errors.required">Target is required</div>
-        <div *ngIf="f.target.errors.number">T mustarget be a valid number address</div>
+        <div *ngIf="f.target.errors.number">Target must be a valid number</div>
+
+      </div>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Stop Loss Value</ion-label>
+      <ion-input type="text" placeholder="Stop Loss" formControlName="stoplosss" autofocus ></ion-input>
+      <div *ngIf="submitted && f.stoploss.errors" class="invalid-feedback">
+        <div *ngIf="f.stoploss.errors.required">Stop Loss is required</div>
+        <div *ngIf="f.stoploss.errors.number">Stop Loss must be a valid number</div>
 
       </div>
     </ion-item>
